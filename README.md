@@ -46,31 +46,32 @@ If you have experience working with Kubernetes, you can attempt the bonus scenar
 - Configure liveliness check, resource quotas for the deployment.
 
 ---
-## Deployment method:
+** Deployment method: **
 
 Below is bird's-eye view of this setup:Dependencies
 [Go application & redis] << docker-compose << Docker << Compute Engine << Ansible & Vagrant << Google Cloud Platform.
 
 Dependencies:
-  *python >= 2.6
-  *google-auth >= 1.3.0
-  *ruby
-  *Vagrant
-  *Ansible
+  - python >= 2.6
+  - google-auth >= 1.3.0
+  - ruby
+  - Vagrant
+  - Ansible
 Created and added SSH public keys to GCP project metadata
 Created service account with a JSON key.
 
-## Details of scripts used for deployment:
+** Details of scripts used for deployment: **
 1. I choose GCP to deploy this application.
 2. Attached Dockerfile created for application.
 3. Attached docker-compose.yml will build image and deploy application.
 4. For server deployment I have two options - any one can be used:
-      * One using vagrant - bash script (gcp_instance_vagrant.sh)
-      * Other using Ansible - (gcp_instance.yml) - BONUS
+      - One using vagrant - bash script (gcp_instance_vagrant.sh)
+      - Other using Ansible - (gcp_instance.yml) - BONUS
 5. Provisioning server with ansible - basically configuring server - (gcp_post_deployment.yml)
 
 
-### FINAL OUTPUT:
+** FINAL OUTPUT: **
+'''
 e_vishnu55@demo-ops:~$ curl http://localhost:8000 
 welcome to api 1
 e_vishnu55@demo-ops:~$ curl http://localhost:8000 
@@ -78,4 +79,4 @@ welcome to api 2
 e_vishnu55@demo-ops:~$ curl http://localhost:8000 
 welcome to api 3
 e_vishnu55@demo-ops:~$
-
+'''
