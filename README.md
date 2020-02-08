@@ -4,12 +4,11 @@ This repo is created with a sample go application deployed as a microservices in
 TASK:
 # Zerodha Ops Task
 
-## Description
+# Description
 
 This is a sample `Go` application which connects to Redis. The app increments a `counter` on an incoming request.
 
-### Setting up the app
-
+# Setting up the app
 - Use `make build` to compile the binary.
 - Set the environment variables:
     - `DEMO_APP_ADDR`: Address where the app should listen to
@@ -38,7 +37,7 @@ This is a sample `Go` application which connects to Redis. The app increments a 
 
 - Commit the scripts to Github and share the link.
 
-### Bonus Section
+# Bonus Section
 
 If you have experience working with Kubernetes, you can attempt the bonus scenario:
 
@@ -47,7 +46,7 @@ If you have experience working with Kubernetes, you can attempt the bonus scenar
 - Configure liveliness check, resource quotas for the deployment.
 
 ---
-Deployment method:
+## Deployment method:
 
 Below is bird's-eye view of this setup:Dependencies
 [Go application & redis] << docker-compose << Docker << Compute Engine << Ansible & Vagrant << Google Cloud Platform.
@@ -61,7 +60,7 @@ Dependencies:
 Created and added SSH public keys to GCP project metadata
 Created service account with a JSON key.
 
-Details of scripts used for deployment:
+## Details of scripts used for deployment:
 1. I choose GCP to deploy this application.
 2. Attached Dockerfile created for application.
 3. Attached docker-compose.yml will build image and deploy application.
@@ -71,12 +70,12 @@ Details of scripts used for deployment:
 5. Provisioning server with ansible - basically configuring server - (gcp_post_deployment.yml)
 
 
-FINAL OUTPUT:
-e_vishnu55@demo-ops:~$ curl http://localhost:8000
+### FINAL OUTPUT:
+e_vishnu55@demo-ops:~$ curl http://localhost:8000 
 welcome to api 1
-e_vishnu55@demo-ops:~$ curl http://localhost:8000
+e_vishnu55@demo-ops:~$ curl http://localhost:8000 
 welcome to api 2
-e_vishnu55@demo-ops:~$ curl http://localhost:8000
+e_vishnu55@demo-ops:~$ curl http://localhost:8000 
 welcome to api 3
 e_vishnu55@demo-ops:~$
 
