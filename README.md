@@ -1,10 +1,9 @@
 # zerodha
 This repo is created with a sample go application deployed as a microservices in containers using Docker by provisioning an compute engine instance in Google Cloud Platform.
 
-TASK:
-# Zerodha Ops Task
+## Zerodha Ops Task
 
-# Description
+## Description
 
 This is a sample `Go` application which connects to Redis. The app increments a `counter` on an incoming request.
 
@@ -62,12 +61,14 @@ Created service account with a JSON key.
 
 ## Details of scripts used for deployment: 
 1. I choose GCP to deploy this application.
-2. Attached Dockerfile created for application.
-3. Attached docker-compose.yml will build image and deploy application.
-4. For server deployment I have two options - any one can be used:
-      - One using vagrant - bash script (gcp_instance_vagrant.sh)
-      - Other using Ansible - (gcp_instance.yml) - BONUS
-5. Provisioning server with ansible - basically configuring server - (gcp_post_deployment.yml)
+2. For server deployment I have two options - any one can be used:
+      - One using vagrant - bash script (`gcp_instance_vagrant.sh`)
+      - Other using Ansible - (`gcp_instance.yml`) - BONUS
+3. Provisioning server with ansible - basically configuring server - (`gcp_post_deployment.yml`)
+4. Attached `Dockerfile` created for application.
+5. Attached `docker-compose.yml` will build image and deploy application as container in the provisioned server (`demo-ops`). 
+ 
+ 
 
 
 ## FINAL OUTPUT:
