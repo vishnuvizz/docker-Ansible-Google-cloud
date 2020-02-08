@@ -1,0 +1,103 @@
+---
+- name: post deployment of GCP instance
+  hosts: demo-ops
+  gather_facts: yes
+  vars:
+    dockerfile_src_path: /home/e_vishnu55/ops/
+
+  tasks:
+    - name: add "demo" user
+      user:
+        name: demo
+        comment: an user
+        group: adm
+        expires: -1
+      become: yes
+
+    - name: increase no. of open files
+      sysctl:
+         name: fs.file-max
+         value: '500000'
+         state: present
+      become: yes
+    
+    - name: reduce swap consumption
+      sysctl:
+        name: vm.swappiness
+        value: '5'
+        state: present
+      become: yes
+
+    - name: overcommiting memory to make sure redis updating in background properly
+      sysctl:
+        name: vm.overcommit_memory
+        value: '1'
+        state: present
+      become: yes
+
+    - name: change timezone to IST
+      timezone:
+        name: Asia/Kolkata
+      become: yes
+
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+      become: yes
+
+#installing necessary pakages before installing docker
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+      become: yes
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      become: yes
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+      become: yes
+
+    - name:  Install Docker and Docker-Compose
+      apt: 
+        pkg: 
+          - docker
+          - docker-ce
+          - docker-compose
+        state: latest
+        update_cache: yes
+      become: yes
+
+    - name: copy application, Dockerfle and docker-compose.yml
+      copy:
+        src: "{{dockerfile_src_path}}"
+        dest: /etc/demo-ops/
+      become: yes
+
+    - name: set docker log to 10MB size with max of 5 files
+      copy:
+        content: |  
+           {
+             "log-driver": "json-file",
+             "log-opts": {
+               "max-size": "10m",
+               "max-file": "5" 
+              }
+            }
+        dest: "/etc/docker/daemon.json"
+      become: yes
+      
+    - name: Restart Docker service 
+      service:
+        name: docker
+        state: restarted
+      become: yes
+
+#run docker container in detached mode
+    - name: start container
+      shell: docker-compose -f /etc/demo-ops/docker-compose.yml up -d 
+      become: yes

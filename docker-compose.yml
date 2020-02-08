@@ -1,0 +1,16 @@
+#docker-compose file version 3
+version: '2'
+
+services:
+#this builds application and expose port 8000 to host machine        
+        go-docker:
+          build: .
+          ports: 
+            - "8000:8080"
+          depends_on:
+            - redis
+#this fires up redis container and mounts /data in host machine
+        redis:
+          image: redis
+          volumes:
+            - /data:/data
