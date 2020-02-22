@@ -1,9 +1,9 @@
-# zerodha
+# info
 This repo is created with a sample go application deployed as a microservices in containers using Docker by provisioning an compute engine instance in Google Cloud Platform.
 
-## Zerodha Ops Task
 
-## Description
+
+## Description 
 
 This is a sample `Go` application which connects to Redis. The app increments a `counter` on an incoming request.
 
@@ -33,18 +33,18 @@ This is a sample `Go` application which connects to Redis. The app increments a 
   - Install Docker and Docker-Compose
   - Configure Docker Daemon to have sane defaults. For eg: to keep logs size in check.
   - Deploy the `docker-compose.yml` in `/etc/demo-ops` and start the services
-
-- Commit the scripts to Github and share the link.
-
-### Bonus Section
-
-If you have experience working with Kubernetes, you can attempt the bonus scenario:
-
-- Create a namespace `demo-ops`
-- Create a deployment and service manifest for the app.
-- Configure liveliness check, resource quotas for the deployment.
-
 ---
+.
+
+
+
+
+
+
+
+.
+
+
 ## Deployment method: 
 
 ### Below is bird's-eye view of this setup:
